@@ -1,1 +1,10 @@
-
+/open-dubber  
+├── src/  
+│   ├── app.py                  # Backend (Flask)  
+│   ├── dubber.py               # Logic (Transcribe, Translate, TTS)  
+│   └── templates/              # Frontend (HTML)  
+├── samples/                    # مثال فيديو وترجمات  
+├── docs/  
+│   └── GUIDE.md               # دليل الاستخدام  
+├── requirements.txt           # Python dependencies  
+└── README.md                  # وصف المشروع  
