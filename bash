@@ -1,1 +1,1 @@
-bas
+python src/app.pybas
