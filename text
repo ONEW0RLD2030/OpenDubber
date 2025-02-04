@@ -8,3 +8,38 @@
 │   └── GUIDE.md               # دليل الاستخدام  
 ├── requirements.txt           # Python dependencies  
 └── README.md                  # وصف المشروع  
+---
+
+### 3. **ملف `src/app.py` (Backend)**  
+```python
+from flask import Flask, render_template, request, send_file
+from dubber import dub_video
+import os
+
+app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = 'uploads'
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+@app.route('/dub', methods=['POST'])
+def dub():
+    # استقبال الفيديو من المستخدم
+    video = request.files['video']
+    lang = request.form['lang']
+    
+    # حفظ الفيديو مؤقتًا
+    video_path = os.path.join(app.config['UPLOAD_FOLDER'], video.filename)
+    video.save(video_path)
+    
+    # معالجة الدبلجة
+    output_path = dub_video(video_path, lang)
+    
+    # إعادة الفيديو الجديد
+    return send_file(output_path, as_attachment=True)
+
+if __name__ == '__main__':
+    os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+    app.run(debug=True)
+    
