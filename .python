@@ -1,3 +1,6 @@
 import whisper
 model = whisper.load_model("base")  # مجاني تمامًا
 result = model.transcribe("video.mp4")
+from transformers import MarianMTModel, MarianTokenizer
+
+model = MarianMTModel.from_pretrained("Helsinki-NLP/opus-mt-en-ar")  # مجاني
